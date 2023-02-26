@@ -1,7 +1,8 @@
+#include <cmath>
 #include <fstream>
 #include <iostream>
-#include <cmath>
 #include <vector>
+
 const int MATRIX_SIZE_3X3 = 3;
 const int MATRIX_SIZE_2X2 = 2;
 
@@ -24,9 +25,10 @@ double GetDeterminant(double** matrix)
 
 double GetMinor(double** matrix, int i1, int j1)
 {
-	double** smallMatrix = InitializeMatrix(2);
+	double** smallMatrix = InitializeMatrix(MATRIX_SIZE_2X2);
 	std::vector<double> smallMatrixElements;
 	int smallMatrixElementsAdded = 0;
+
 	for (int i = 0; i < MATRIX_SIZE_3X3; i++)
 	{
 		for (int j = 0; j < MATRIX_SIZE_3X3; j++)
@@ -79,13 +81,18 @@ double** GetInvertMatrix(double** transposedMatrix, double determinant)
 
 int main(int argc, char* argv[])
 {
-	if (argv[1] == nullptr)
+	if (argc != 2)
 	{
-		std::cout << "Input filename is empty\n";
-		return -1;
+		std::cout << "Invalid options count\nExample: invert.exe <matrix file>\n";
+		return 1;
 	}
-	std::ifstream inputFile(argv[1]);
 
+	std::ifstream inputFile(argv[1]);
+	if (!inputFile.is_open())
+	{
+		std::cout << "Error with file openning\n";
+		return 1;
+	}
 
 	double** matrix = InitializeMatrix(MATRIX_SIZE_3X3);
 	for (int i = 0; i < MATRIX_SIZE_3X3; i++)
@@ -100,12 +107,7 @@ int main(int argc, char* argv[])
 	if (determinant == 0)
 	{
 		std::cout << "Invert matrix isn't exist\n";
-		if (argv[2] != nullptr)
-		{
-			std::ofstream outputFile(argv[2]);
-			outputFile << "Invert matrix isn't exist\n";
-		}
-		return 0;
+		return 1;
 	}
 
 	double** transposedMatrix = GetTransposedMatrix(matrix);
@@ -119,19 +121,5 @@ int main(int argc, char* argv[])
 			std::cout << round(invertMatrix[i][j] * 1000) / 1000 << ' ';
 		}
 		std::cout << '\n';
-	}
-	
-	if (argv[2] != nullptr)
-	{
-		std::ofstream outputFile(argv[2]);
-
-		for (int i = 0; i < MATRIX_SIZE_3X3; i++)
-		{
-			for (int j = 0; j < MATRIX_SIZE_3X3; j++)
-			{
-				outputFile << round(invertMatrix[i][j] * 1000) / 1000 << ' ';
-			}
-			outputFile << '\n';
-		}	
 	}
 }

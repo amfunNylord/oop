@@ -7,10 +7,10 @@ set OUT="%TEMP%\out.txt"
 %PROGRAM% test1.txt %OUT% Hello mama || goto err
 fc %OUT% test1-out.txt || goto err
 :: Тест с заменой на пустую строку
-%PROGRAM% test1.txt %OUT% Hello || goto err
+%PROGRAM% test1.txt %OUT% Hello "" || goto err
 fc %OUT% test2-out.txt || goto err
 :: Тест с заменой пустой строки 
-%PROGRAM% test1.txt %OUT%  Hello || goto err
+%PROGRAM% test1.txt %OUT% "" Hello || goto err
 fc %OUT% test3-out.txt || goto err
 :: Тест с заменой многократного вхождения искомой строки в строку-заменитель
 %PROGRAM% test1.txt %OUT% ma mama || goto err
