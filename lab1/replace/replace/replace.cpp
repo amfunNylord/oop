@@ -2,31 +2,24 @@
 #include <iostream>
 #include <string>
 
-void CopyPartOfStr(size_t& i, size_t lim, std::string& newStr, std::string str)
-{
-	for (i; i < lim; i++)
-	{
-		newStr += str[i];
-	}
-}
-
 std::string ReplaceString(const std::string& str, const std::string& searchString, const std::string& replaceString)
 {
 	std::string newStr;
-	size_t indexOfSearchString = 0, indexOfAllString = 0;
+	// непонятные имена
+	size_t posSearchString = 0, indexStr = 0;
 	if (searchString != "")
 	{
-		while ((indexOfSearchString = str.find(searchString, indexOfSearchString)) != std::string::npos)
+		while ((posSearchString = str.find(searchString, posSearchString)) != std::string::npos)
 		{
-			CopyPartOfStr(indexOfAllString, indexOfSearchString, newStr, str);
-			indexOfSearchString += searchString.length();
-			indexOfAllString = indexOfSearchString;
+			newStr.append(str, indexStr, posSearchString - indexStr);
+			posSearchString += searchString.length();
+			indexStr = posSearchString;
 			newStr += replaceString;
 		}
 	}
-	if (indexOfAllString != str.length())
+	if (indexStr != str.length())
 	{
-		CopyPartOfStr(indexOfAllString, str.length(), newStr, str);
+		newStr.append(str, indexStr, str.length() - indexStr);
 	}
 	return newStr;
 }
@@ -48,15 +41,20 @@ int main(int argc, char* argv[])
 		std::cout << "Invalid argument count\nUsage: replace.exe <inputFile> <outputFile> <searchString> <replacementString>\n";
 		return 1;
 	}
-
 	std::ifstream inputFile(argv[1]);
 	std::ofstream outputFile(argv[2]);
 
 	if (!inputFile.is_open())
 	{
-		std::cout << "Problems with file openning\n";
+		std::cout << "Problems with input file openning\n";
 		return 1;
 	}
+	if (!outputFile.is_open())
+	{
+		std::cout << "Problems with output file openning\n";
+		return 1;
+	}
+
 
 	std::string searchString = argv[3];
 	std::string replaceString = argv[4];
