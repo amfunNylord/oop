@@ -15,21 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Mini-dictionary.cpp">
+    <ClCompile Include="HTMLDecode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UseDictionary.cpp">
+    <ClCompile Include="Decode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReadDictionary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SaveDictionary.cpp">
+    <ClCompile Include="ConvertStrToEntities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mini-dictionary.h">
+    <ClInclude Include="HTMLDecode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

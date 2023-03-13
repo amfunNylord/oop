@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Mini-dictionary.cpp">
+    <ClCompile Include="Mini-dictionary_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UseDictionary.cpp">
+    <ClCompile Include="..\Mini-dictionary\ReadDictionary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReadDictionary.cpp">
+    <ClCompile Include="..\Mini-dictionary\SaveDictionary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SaveDictionary.cpp">
+    <ClCompile Include="..\Mini-dictionary\UseDictionary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mini-dictionary.h">
+    <ClInclude Include="..\Mini-dictionary\Mini-dictionary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
