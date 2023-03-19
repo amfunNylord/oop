@@ -131,6 +131,9 @@
     <ClCompile Include="..\HTMLDecode\Decode.cpp" />
     <ClCompile Include="HTMLDecode_tests.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\HTMLDecode\HTMLDecode.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

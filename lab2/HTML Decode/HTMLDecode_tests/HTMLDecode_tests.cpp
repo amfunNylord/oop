@@ -8,30 +8,30 @@ SCENARIO("Test ConvertStrToEntities function")
 	WHEN("Input string isn't any matching")
 	{
 		std::string inputString = "cat";
-		THEN("Function returns 'N'");
+		THEN("Function returns \"cat\"");
 		{
-			char result = ConvertStrToEntities(inputString);
-			CHECK(result == 'N');
+			std::string result = ConvertStrToEntities(inputString);
+			CHECK(result == inputString);
 		}
 	}
 
 	WHEN("Input string has quot")
 	{
-		std::string inputString = "quot";
+		std::string inputString = "&quot;";
 		THEN("Function returns \"")
 		{
-			char result = ConvertStrToEntities(inputString);
-			CHECK(result == '"');
+			std::string result = ConvertStrToEntities(inputString);
+			CHECK(result == "\"");
 		}
 	}
 
 	WHEN("Input string has matching but not full")
 	{
-		std::string inputString = "quota";
+		std::string inputString = "&quota;";
 		THEN("Function returns 'N'")
 		{
-			char result = ConvertStrToEntities(inputString);
-			CHECK(result == 'N');
+			std::string result = ConvertStrToEntities(inputString);
+			CHECK(result == inputString);
 		}
 	}
 }
@@ -64,6 +64,17 @@ SCENARIO("Test Decode function")
 		std::string inputString = "Cat &lt;says&gt; &quot;Meow&quot;. M&amp;M&apos;s";
 		std::string resultString = "Cat <says> \"Meow\". M&M’s";
 		THEN("Decoded string is Cat <says> \" Meow \". M&M’s")
+		{
+			std::string decodedString = Decode(inputString);
+			CHECK(decodedString == resultString);
+		}
+	}
+
+	WHEN("Input string has the form \"&&&&&&&&&&&&&&&&&&&&&&;\"")
+	{
+		std::string inputString = "&&&&&&&&&&&&&&&&&&&&&&;";
+		std::string resultString = "&&&&&&&&&&&&&&&&&&&&&&;";
+		THEN("Decoded string is \"&&&&&&&&&&&&&&&&&&&&&&;\"")
 		{
 			std::string decodedString = Decode(inputString);
 			CHECK(decodedString == resultString);

@@ -5,14 +5,8 @@
 #include "Mini-dictionary.h"
 #include "Windows.h"
 
-int main(int argc, char* argv[])
+void CheckCommandOptions(int argc, char* argv[], bool& isInputFileGood, std::map<std::string, std::string> dictionary)
 {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-	std::map<std::string, std::string> dictionary;
-
-	bool isInputFileGood = false;
-
 	if (argc == 2)
 	{
 		std::ifstream fIn(argv[1]);
@@ -27,21 +21,40 @@ int main(int argc, char* argv[])
 			std::cout << "‘айл со словарем не может быть открыт, используем пустой словарь\n";
 		}
 	}
+}
+
+void SaveFile(bool isInputFileGood, std::map<std::string, std::string> dictionary, char* argv[], std::istream& input)
+{
+	std::string outputFileName;
+	if (!isInputFileGood)
+	{
+		std::cout << "¬ведите им€ файла, в который вы хотите сохранить словарь\n";
+		getline(input, outputFileName);
+	}
+	else
+	{
+		outputFileName = argv[1];
+	}
+	std::ofstream fOut(outputFileName);
+	SaveDictionary(fOut, dictionary);
+}
+
+int main(int argc, char* argv[])
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	std::map<std::string, std::string> dictionary;
+
+	bool isInputFileGood = false;
+	CheckCommandOptions(argc, argv, isInputFileGood, dictionary);
+
 	std::cout << "¬ведите слово, которое хотите перевети\n";
 
 	bool isSaved = false;
-	UseDictionary(dictionary, isSaved);
+	UseDictionary(dictionary, isSaved, std::cin);
 
-	if (isSaved && isInputFileGood)
+	if (isSaved)
 	{
-		std::ofstream fOut(argv[1]);
-		if (fOut.is_open())
-		{
-			SaveDictionary(fOut, dictionary);
-		}
-		else
-		{
-			std::cout << "‘айл нельз€ открыть, словарь не сохранен\n";
-		}
+		SaveFile(isInputFileGood, dictionary, argv, std::cin);
 	}
 }

@@ -127,9 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Mini-dictionary\FindTranslation.cpp" />
     <ClCompile Include="..\Mini-dictionary\ReadDictionary.cpp" />
+    <ClCompile Include="..\Mini-dictionary\SaveChanges.cpp" />
     <ClCompile Include="..\Mini-dictionary\SaveDictionary.cpp" />
     <ClCompile Include="..\Mini-dictionary\UseDictionary.cpp" />
+    <ClCompile Include="..\Mini-dictionary\WorkWithUnknownWord.cpp" />
     <ClCompile Include="Mini-dictionary_tests.cpp" />
   </ItemGroup>
   <ItemGroup>

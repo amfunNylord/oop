@@ -27,6 +27,15 @@
     <ClCompile Include="..\Mini-dictionary\UseDictionary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Mini-dictionary\SaveChanges.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mini-dictionary\WorkWithUnknownWord.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mini-dictionary\FindTranslation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Mini-dictionary\Mini-dictionary.h">

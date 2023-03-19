@@ -1,15 +1,15 @@
 #include <iostream>
 #include <map>
 
-std::map<const std::string, const char> entities = {
-	{ "quot", '"' },
-	{ "apos", '’' },
-	{ "lt", '<' },
-	{ "gt", '>' },
-	{ "amp", '&' }
+std::map<const std::string, const std::string> entities = {
+	{ "&quot;", "\"" },
+	{ "&apos;", "’" },
+	{ "&lt;", "<" },
+	{ "&gt;", ">" },
+	{ "&amp;", "&" }
 };
 
-char ConvertStrToEntities(std::string possibleEntity)
+std::string ConvertStrToEntities(std::string possibleEntity)
 {
 	for (auto& item : entities)
 	{
@@ -18,5 +18,5 @@ char ConvertStrToEntities(std::string possibleEntity)
 			return item.second;
 		}
 	}
-	return 'N';
+	return possibleEntity;
 }

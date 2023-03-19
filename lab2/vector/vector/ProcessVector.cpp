@@ -5,7 +5,7 @@
 
 void ProcessVector(std::vector<double>& numbers)
 {
-	if (numbers.size() == 0)
+	if (numbers.empty())
 	{
 		return;
 	}
@@ -13,6 +13,6 @@ void ProcessVector(std::vector<double>& numbers)
 	double maxElement = *minMax.second;
 	double minElement = *minMax.first;
 	double multiplicationMaxAndMin = maxElement * minElement;
-
+	// укоротить строчки
 	std::transform(numbers.begin(), numbers.end(), numbers.begin(), [multiplicationMaxAndMin](double x) { return x < 0 ? x * multiplicationMaxAndMin : x; });
 }

@@ -3,37 +3,25 @@
 
 std::string Decode(std::string const& html)
 {
-	std::string decodedStr = "";
-	size_t posSearchStr = 0, indexStr = 0;
-	while ((posSearchStr = html.find('&', posSearchStr)) != std::string::npos)
+	std::string decodedStr;
+	size_t indexStart = 0, indexEnd = 0;// придумать новые названия
+	while ((indexStart = html.find('&', indexStart)) != std::string::npos)
 	{
-		decodedStr.append(html, indexStr, posSearchStr - indexStr);
-		posSearchStr++;
-		indexStr = posSearchStr;
-		size_t lengthWordBetweenSymbols = html.find(';', indexStr) - indexStr;
-		if (lengthWordBetweenSymbols <= 4 && lengthWordBetweenSymbols >= 2)
-		{
-			std::string possibleEntity = "";
-			possibleEntity.append(html, indexStr, lengthWordBetweenSymbols);
-			char convertedEntity = ConvertStrToEntities(possibleEntity);
-			if (convertedEntity == 'N')
-			{
-				decodedStr += possibleEntity;
-			}
-			else
-			{
-				decodedStr += convertedEntity;
-			}
-		}
-		else
-		{
-			decodedStr.append(html, indexStr, lengthWordBetweenSymbols);
-		}
-		indexStr += lengthWordBetweenSymbols + 1;
+		decodedStr.append(html, indexEnd, indexStart - indexEnd);
+		indexStart++;
+		indexEnd = indexStart;
+		size_t lengthWordBetweenSymbols = html.find(';', indexEnd) - indexEnd;
+		std::string possibleEntity = "&";
+		possibleEntity.append(html, indexEnd, lengthWordBetweenSymbols);
+		possibleEntity += ";";
+		std::string convertedEntity = ConvertStrToEntities(possibleEntity);
+		decodedStr += convertedEntity;
+		indexStart += lengthWordBetweenSymbols + 1;
+		indexEnd = indexStart;
 	}
-	if (indexStr != html.length())
+	if (indexStart != html.length())
 	{
-		decodedStr.append(html, indexStr, html.length() - indexStr);
+		decodedStr.append(html, indexEnd, html.length() - indexEnd);
 	}
 	return decodedStr;
 }
