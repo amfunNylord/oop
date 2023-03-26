@@ -15,12 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FilterBadWords_tests.cpp">
+    <ClCompile Include="Car.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CCar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\FilterBadWords\FilterBadWords.h">
+    <ClInclude Include="CCar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

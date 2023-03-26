@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="FilterBadWords_tests.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\FilterBadWords\FilterBadWords.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

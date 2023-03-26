@@ -8,9 +8,9 @@ void UseDictionary(std::map<std::string, std::string>& dictionary, bool& isSaved
 	std::map<std::string, std::string> dictionaryCopy = dictionary;
 	bool isEdit = false;
 	std::string userInput;
+	getline(input, userInput);
 	while (1)
 	{
-		getline(input, userInput);
 		if (input.eof())
 		{
 			return;
@@ -33,5 +33,6 @@ void UseDictionary(std::map<std::string, std::string>& dictionary, bool& isSaved
 		{
 			WorkWithUnknownWorld(searchWord, userInput, dictionaryCopy, isEdit, input);
 		}
+		getline(input, userInput);
 	}
 }

@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Filter.cpp" />
     <ClCompile Include="FilterBadWords.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FilterBadWords.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

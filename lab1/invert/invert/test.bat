@@ -13,6 +13,7 @@ fc %OUT% test3-out.txt || goto err
 :: Тест, если определитель равен 0
 %PROGRAM% test2.txt >%OUT% || goto err
 fc %OUT% test2-out.txt || goto err
+// некорректная матрица ввод
 
 echo All tests passed
 exit /B 0

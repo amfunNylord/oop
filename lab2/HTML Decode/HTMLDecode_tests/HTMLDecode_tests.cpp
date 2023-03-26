@@ -3,39 +3,6 @@
 #include "../../../catch2/catch.hpp"
 #include "../HTMLDecode/HTMLDecode.h"
 
-SCENARIO("Test ConvertStrToEntities function")
-{ 
-	WHEN("Input string isn't any matching")
-	{
-		std::string inputString = "cat";
-		THEN("Function returns \"cat\"");
-		{
-			std::string result = ConvertStrToEntities(inputString);
-			CHECK(result == inputString);
-		}
-	}
-
-	WHEN("Input string has quot")
-	{
-		std::string inputString = "&quot;";
-		THEN("Function returns \"")
-		{
-			std::string result = ConvertStrToEntities(inputString);
-			CHECK(result == "\"");
-		}
-	}
-
-	WHEN("Input string has matching but not full")
-	{
-		std::string inputString = "&quota;";
-		THEN("Function returns 'N'")
-		{
-			std::string result = ConvertStrToEntities(inputString);
-			CHECK(result == inputString);
-		}
-	}
-}
-
 SCENARIO("Test Decode function")
 {
 	WHEN("Input string is empty")

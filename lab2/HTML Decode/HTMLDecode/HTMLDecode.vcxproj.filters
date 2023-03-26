@@ -29,5 +29,8 @@
     <ClInclude Include="HTMLDecode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConvertStrToEntities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

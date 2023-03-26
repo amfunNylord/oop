@@ -2,7 +2,7 @@
 #include <string>
 #include <map>
 
-void WorkWithUnknownWorld(std::string searchWord, std::string userInput, std::map<std::string, std::string>& dictionaryCopy, bool isEdit, std::istream& input)
+void WorkWithUnknownWorld(std::string searchWord, std::string userInput, std::map<std::string, std::string>& dictionaryCopy, bool& isEdit, std::istream& input)
 {
 	std::cout << "Неизвестное слово \"" + searchWord + "\". Введите перевод или пустую строку для отказа.\n";
 	getline(input, userInput);

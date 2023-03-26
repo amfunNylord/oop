@@ -34,7 +34,7 @@ double GetMinor(Mat3x3 matrix, int i1, int j1)
 			smallMatrixElements.emplace_back(matrix[i][j]);
 		}
 	}
-
+	// разбить
 	for (int i = 0; i < MATRIX_SIZE_2X2; i++)
 	{
 		for (int j = 0; j < MATRIX_SIZE_2X2; j++)
@@ -66,6 +66,8 @@ Mat3x3 GetInvertMatrix(Mat3x3 matrix)
 	if (determinant == 0)
 	{
 		std::cout << "Invert matrix isn't exist\n";
+		// std::optional
+		// можно вернуть nullopt
 		return Mat3x3{};
 	}
 
@@ -79,6 +81,7 @@ Mat3x3 GetInvertMatrix(Mat3x3 matrix)
 			invertMatrix[i][j] = 1 / determinant * transposedMatrix[i][j];
 		}
 	}
+	// вынести инвертирование вотдельную функцию
 	return invertMatrix;
 }
 

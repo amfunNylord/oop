@@ -132,6 +132,7 @@
     <ClCompile Include="HTMLDecode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConvertStrToEntities.h" />
     <ClInclude Include="HTMLDecode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

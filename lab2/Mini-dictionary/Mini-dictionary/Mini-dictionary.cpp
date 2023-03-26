@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 	bool isInputFileGood = false;
 	CheckCommandOptions(argc, argv, isInputFileGood, dictionary);
 
-	std::cout << "Введите слово, которое хотите перевети\n";
+	std::cout << "Введите слово, которое хотите перевести\n";
 
 	bool isSaved = false;
 	UseDictionary(dictionary, isSaved, std::cin);

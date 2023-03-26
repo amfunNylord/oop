@@ -8,7 +8,7 @@ int main()
 	while (getline(std::cin, html))
 	{
 		std::string decodedHtml = Decode(html);
-		std::cout << decodedHtml << '\n';
+		std::cout << decodedHtml << std::endl;
 	}
 	return 0;
 }
