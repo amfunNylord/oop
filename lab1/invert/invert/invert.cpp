@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include <optional>
 
 const int MATRIX_SIZE_3X3 = 3;
 const int MATRIX_SIZE_2X2 = 2;
@@ -60,19 +61,8 @@ Mat3x3 GetTransposedMatrix(Mat3x3 matrix)
 	return transposedMatrix;
 }
 
-Mat3x3 GetInvertMatrix(Mat3x3 matrix)
+Mat3x3 InvertMatrix(double determinant, Mat3x3 transposedMatrix)
 {
-	double determinant = GetDeterminant(matrix);
-	if (determinant == 0)
-	{
-		std::cout << "Invert matrix isn't exist\n";
-		// std::optional
-		// можно вернуть nullopt
-		return Mat3x3{};
-	}
-
-	Mat3x3 transposedMatrix = GetTransposedMatrix(matrix);
-
 	Mat3x3 invertMatrix;
 	for (int i = 0; i < MATRIX_SIZE_3X3; i++)
 	{
@@ -81,11 +71,25 @@ Mat3x3 GetInvertMatrix(Mat3x3 matrix)
 			invertMatrix[i][j] = 1 / determinant * transposedMatrix[i][j];
 		}
 	}
-	// вынести инвертирование вотдельную функцию
+}
+
+std::optional<Mat3x3> GetInvertMatrix(Mat3x3 matrix)
+{
+	double determinant = GetDeterminant(matrix);
+	if (determinant == 0)
+	{
+		std::cout << "Invert matrix isn't exist\n";
+		return std::nullopt;
+	}
+
+	Mat3x3 transposedMatrix = GetTransposedMatrix(matrix);
+
+	Mat3x3 invertMatrix = InvertMatrix(determinant, transposedMatrix);
+
 	return invertMatrix;
 }
 
-void PrintMatrix(Mat3x3 invertMatrix)
+void PrintMatrix(std::optional<Mat3x3> invertMatrix)
 {
 	for (int i = 0; i < MATRIX_SIZE_3X3; i++)
 	{
@@ -126,9 +130,9 @@ int main(int argc, char* argv[])
 	Mat3x3 matrix;
 	ReadMatrix(inputFile, matrix);
 
-	Mat3x3 invertMatrix = GetInvertMatrix(matrix);
+	std::optional<Mat3x3> invertMatrix = GetInvertMatrix(matrix);
 
-	if (invertMatrix == Mat3x3{})
+	if (invertMatrix == std::nullopt)
 	{
 		return 1;
 	}

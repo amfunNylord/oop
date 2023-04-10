@@ -3,14 +3,16 @@
 #include <charconv>
 #include <string>
 
-int FlipByte(unsigned char enteredByte)
+// тип должен быть такой же
+unsigned int FlipByte(unsigned char enteredByte)
 {
 	enteredByte = ((enteredByte & 0b1111) << 4) | ((enteredByte & 0b11110000) >> 4);
 	enteredByte = ((enteredByte & 0b00110011) << 2) | ((enteredByte & 0b11001100) >> 2);
 	enteredByte = ((enteredByte & 0b01010101) << 1) | ((enteredByte & 0b10101010) >> 1);
-	return static_cast<int>(enteredByte);
+	return static_cast<unsigned int>(enteredByte);
 }
 
+// странный метод
 bool IsInt(char* enteredByte)
 {
 	int result;
@@ -32,15 +34,16 @@ int main(int argc, char* argv[])
 		std::cout << "Wrong entered byte, it is string\n";
 		return 1;
 	}
-	if (atoi(argv[1]) < 0 or atoi(argv[1]) > 255)
+	int intByte = atoi(argv[1]);
+	if (intByte < 0 || intByte > 255)
 	{
 		std::cout << "Wrong entered byte, it isn't in 0 - 255\n";
 		return 1;
 	}
 
-	unsigned char enteredByte = static_cast<unsigned char>(atoi(argv[1]));
+	unsigned char enteredByte = static_cast<unsigned char>(intByte);
 
-	int flippedByte = FlipByte(enteredByte);
+	unsigned int flippedByte = FlipByte(enteredByte);
 
 	std::cout << flippedByte << '\n';
 }

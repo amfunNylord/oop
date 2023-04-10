@@ -1,5 +1,5 @@
 @echo off
-
+chcp 65001
 set PROGRAM="%~1"
 
 set OUT="%TEMP%\out.txt"
@@ -13,6 +13,7 @@ fc %OUT% test2-out.txt || goto err
 :: Тест с Hello
 %PROGRAM% Hello >%OUT% || goto err
 fc %OUT% test3-out.txt || goto err
+// если ошибка то end
 
 echo All tests passed
 exit /B 0

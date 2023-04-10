@@ -18,12 +18,18 @@
     <ClCompile Include="Car_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Car\CCar.cpp">
+    <ClCompile Include="..\Car\Car.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Car\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Car\CCar.h">
+    <ClInclude Include="..\Car\Car.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Car\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

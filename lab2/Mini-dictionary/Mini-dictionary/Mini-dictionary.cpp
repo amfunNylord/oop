@@ -4,7 +4,8 @@
 #include <string>
 #include "Mini-dictionary.h"
 #include "Windows.h"
-
+//check argc
+// вызывать readdictionary не в этой функции
 void CheckCommandOptions(int argc, char* argv[], bool& isInputFileGood, std::map<std::string, std::string> dictionary)
 {
 	if (argc == 2)
@@ -14,7 +15,7 @@ void CheckCommandOptions(int argc, char* argv[], bool& isInputFileGood, std::map
 		{
 			isInputFileGood = true;
 			ReadDictionary(fIn, dictionary);
-			fIn.close();
+			fIn.close(); // можно не закрывать
 		}
 		else
 		{
@@ -22,7 +23,7 @@ void CheckCommandOptions(int argc, char* argv[], bool& isInputFileGood, std::map
 		}
 	}
 }
-
+// по ссылке конст
 void SaveFile(bool isInputFileGood, std::map<std::string, std::string> dictionary, char* argv[], std::istream& input)
 {
 	std::string outputFileName;
@@ -43,6 +44,7 @@ int main(int argc, char* argv[])
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
+	// вынести в отдельный тип
 	std::map<std::string, std::string> dictionary;
 
 	bool isInputFileGood = false;
@@ -52,7 +54,7 @@ int main(int argc, char* argv[])
 
 	bool isSaved = false;
 	UseDictionary(dictionary, isSaved, std::cin);
-
+	// isNeededToSave
 	if (isSaved)
 	{
 		SaveFile(isInputFileGood, dictionary, argv, std::cin);

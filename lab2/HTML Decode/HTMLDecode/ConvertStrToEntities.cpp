@@ -9,14 +9,7 @@ std::map<const std::string, const std::string> entities = {
 	{ "&amp;", "&" }
 };
 
-std::string ConvertStrToEntities(std::string possibleEntity)
+std::string ConvertStrToEntities(const std::string possibleEntity)
 {
-	for (auto& item : entities)
-	{
-		if (possibleEntity == item.first)
-		{
-			return item.second;
-		}
-	}
-	return possibleEntity;
+	return entities[possibleEntity] != "" ? entities[possibleEntity] : possibleEntity;
 }

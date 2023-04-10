@@ -2,7 +2,7 @@
 #include <string>
 #include <map>
 #include "Mini-dictionary.h"
-
+// вынести в main
 void UseDictionary(std::map<std::string, std::string>& dictionary, bool& isSaved, std::istream& input)
 {
 	std::map<std::string, std::string> dictionaryCopy = dictionary;

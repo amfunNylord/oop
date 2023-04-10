@@ -5,21 +5,20 @@
 std::string ReplaceString(const std::string& str, const std::string& searchString, const std::string& replaceString)
 {
 	std::string newStr;
-	// непонятные имена
-	size_t posSearchString = 0, indexStr = 0;
+	size_t indexStart = 0, indexEnd = 0;
 	if (searchString != "")
 	{
-		while ((posSearchString = str.find(searchString, posSearchString)) != std::string::npos)
+		while ((indexStart = str.find(searchString, indexStart)) != std::string::npos)
 		{
-			newStr.append(str, indexStr, posSearchString - indexStr);
-			posSearchString += searchString.length();
-			indexStr = posSearchString;
+			newStr.append(str, indexEnd, indexStart - indexEnd);
+			indexStart += searchString.length();
+			indexEnd = indexStart;
 			newStr += replaceString;
 		}
 	}
-	if (indexStr != str.length())
+	if (indexEnd != str.length())
 	{
-		newStr.append(str, indexStr, str.length() - indexStr);
+		newStr.append(str, indexEnd, str.length() - indexEnd);
 	}
 	return newStr;
 }
