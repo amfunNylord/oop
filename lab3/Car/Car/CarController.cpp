@@ -91,7 +91,7 @@ bool CCarController::SetGear(std::istream& args)
 	if (args.eof())
 	{
 		m_output << "Invalid using: SetGear <gear>" << std::endl;
-		return false;
+		return true;
 	}
 	std::string gearStr;
 	args >> gearStr;
@@ -103,12 +103,12 @@ bool CCarController::SetGear(std::istream& args)
 	catch (std::invalid_argument e)
 	{
 		m_output << "Gear must be integer value" << std::endl;
-		return false;
+		return true;
 	}
 	if (gear < -1 || gear > 5)
 	{
 		m_output << "Gear must be from -1 to 5" << std::endl;
-		return false;
+		return true;
 	}
 	if (m_car.SetGear(gear))
 	{
@@ -122,7 +122,7 @@ bool CCarController::SetSpeed(std::istream& args)
 	if (args.eof())
 	{
 		m_output << "Invalid using: SetSpeed <speed>" << std::endl;
-		return false;
+		return true;
 	}
 	std::string speedStr;
 	args >> speedStr;
@@ -134,7 +134,7 @@ bool CCarController::SetSpeed(std::istream& args)
 	catch (std::invalid_argument e)
 	{
 		m_output << "Speed must be integer value" << std::endl;
-		return false;
+		return true;
 	}
 	if (m_car.SetSpeed(speed))
 	{
@@ -145,22 +145,22 @@ bool CCarController::SetSpeed(std::istream& args)
 		if (!m_car.IsSwitchedOnEngine())
 		{
 			m_output << "You need to switch engine on" << std::endl;
-			return false;
+			return true;
 		}
 		if (m_car.GetGear() == GEAR_N)
 		{
 			m_output << "You can only downgrade speed because you are on neutral gear" << std::endl;
-			return false;
+			return true;
 		}
 		if (speed < GEAR_N_MIN_SPEED || speed > GEAR_N_MAX_SPEED)
 		{
 			m_output << "Speed value are higher or lower than car possible" << std::endl;
-			return false;
+			return true;
 		}
 		else
 		{
 			m_output << "Speed value are higher or lower than gear possible" << std::endl;
-			return false;
+			return true;
 		}
 	}
 	return true;

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Car.h"
 
+// можно было задать числами, map уже const
 const std::map<int, std::pair<int, int>> gearSpeedRange = {
 	{ GEAR_R, { GEAR_R_MIN_SPEED, GEAR_R_MAX_SPEED } }, // mb ispolzovat s minusom
 	{ GEAR_N, { GEAR_N_MIN_SPEED, GEAR_N_MAX_SPEED } },
@@ -67,6 +68,10 @@ bool CCar::SetGear(int gear)
 	}
 	if (gear == GEAR_R)
 	{
+		if (m_gear == gear)
+		{
+			return true;
+		}
 		if (m_speed != 0)
 		{
 			std::cout << "You can't set R gear because your speed isn't zero" << std::endl;
