@@ -1,6 +1,6 @@
 #pragma once
 #include <map>
-// убрать map в cpp +
+
 const int GEAR_R = -1;
 const int GEAR_N = 0;
 const int GEAR_1 = 1;
@@ -24,7 +24,6 @@ const int GEAR_4_MAX_SPEED = 90;
 const int GEAR_5_MIN_SPEED = 50;
 const int GEAR_5_MAX_SPEED = 150;
 
-// создать enum для direction +
 enum Direction
 {
 	BACKWARD = -1,
@@ -39,7 +38,7 @@ class CCar
 {
 public:
 	bool IsSwitchedOnEngine() const;
-	Direction GetDirection() const; //возвращать enum +
+	Direction GetDirection() const;
 	int GetGear() const;
 	int GetSpeed() const;
 	bool SwitchOnEngine();
@@ -51,5 +50,4 @@ private:
 	bool m_engineStatus = ENGINE_OFF;
 	int m_speed = GEAR_N_MIN_SPEED;
 	int m_gear = GEAR_N;
-	Direction m_direction = STANDING; // можно ли без direction 
 };

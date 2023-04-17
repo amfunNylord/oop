@@ -1,9 +1,8 @@
 #include "stdafx.h"
 #include "Car.h"
 
-// можно было задать числами, map уже const
 const std::map<int, std::pair<int, int>> gearSpeedRange = {
-	{ GEAR_R, { GEAR_R_MIN_SPEED, GEAR_R_MAX_SPEED } }, // mb ispolzovat s minusom
+	{ GEAR_R, { GEAR_R_MIN_SPEED, GEAR_R_MAX_SPEED } },
 	{ GEAR_N, { GEAR_N_MIN_SPEED, GEAR_N_MAX_SPEED } },
 	{ GEAR_1, { GEAR_1_MIN_SPEED, GEAR_1_MAX_SPEED } },
 	{ GEAR_2, { GEAR_2_MIN_SPEED, GEAR_2_MAX_SPEED } },
@@ -19,7 +18,18 @@ bool CCar::IsSwitchedOnEngine() const
 
 Direction CCar::GetDirection() const
 {
-	return m_direction;
+	if (m_speed > 0)
+	{
+		return FORWARD;
+	}
+	else if (m_speed == 0)
+	{
+		return STANDING;
+	}
+	else
+	{
+		return BACKWARD;
+	}
 }
 
 int CCar::GetGear() const
@@ -42,7 +52,6 @@ bool CCar::SwitchOnEngine()
 	{
 		m_engineStatus = ENGINE_ON;
 		m_gear = GEAR_N;
-		m_direction = STANDING;
 	}
 	return m_engineStatus;
 }
@@ -86,7 +95,7 @@ bool CCar::SetGear(int gear)
 			return false;
 		}
 	}
-	if (m_speed >= gearSpeedRange.find(gear)->second.first && m_speed <= gearSpeedRange.find(gear)->second.second)
+	if ((m_speed < 0 ? -m_speed : m_speed) >= gearSpeedRange.find(gear)->second.first && (m_speed < 0 ? -m_speed : m_speed) <= gearSpeedRange.find(gear)->second.second)
 	{
 		m_gear = gear;
 		return true;
@@ -99,25 +108,20 @@ bool CCar::SetSpeed(int speed)
 {
 	if (m_gear == GEAR_N)
 	{
-		if (speed > m_speed)
+		if (speed > (m_speed < 0 ? -m_speed : m_speed))
 		{
 			return false;
 		}
 	}
 	if (speed >= gearSpeedRange.find(m_gear)->second.first && speed <= gearSpeedRange.find(m_gear)->second.second)
 	{
-		m_speed = speed;
-		if (m_gear >= GEAR_N)
+		if (m_gear == GEAR_R)
 		{
-			m_direction = FORWARD;
+			m_speed = -speed;
 		}
 		else
 		{
-			m_direction = BACKWARD;
-		}
-		if (speed == 0)
-		{
-			m_direction = STANDING;
+			m_speed = speed;
 		}
 		return true;
 	}

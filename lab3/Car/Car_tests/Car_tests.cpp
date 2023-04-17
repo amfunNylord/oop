@@ -176,7 +176,7 @@ SCENARIO("Setting Gear")
 		car.SetGear(GEAR_R);
 		car.SetSpeed(GEAR_R_MAX_SPEED);
 		car.SetGear(GEAR_N);
-		REQUIRE(car.GetSpeed() == GEAR_R_MAX_SPEED);
+		REQUIRE(car.GetSpeed() == -GEAR_R_MAX_SPEED);
 		REQUIRE(car.GetDirection() == BACKWARD);
 		car.SetGear(GEAR_R);
 		THEN("The gear remains neutral")
@@ -210,7 +210,7 @@ SCENARIO("Setting Gear")
 		car.SetGear(GEAR_R);
 		REQUIRE(car.GetGear() == GEAR_R);
 		car.SetSpeed(GEAR_R_MAX_SPEED);
-		REQUIRE(car.GetSpeed() == GEAR_R_MAX_SPEED);
+		REQUIRE(car.GetSpeed() == -GEAR_R_MAX_SPEED);
 		car.SetGear(GEAR_1);
 		THEN("The gear remains R")
 		{
@@ -238,7 +238,7 @@ SCENARIO("Setting Gear")
 		car.SetGear(GEAR_R);
 		REQUIRE(car.GetGear() == GEAR_R);
 		car.SetSpeed(GEAR_R_MAX_SPEED);
-		REQUIRE(car.GetSpeed() == GEAR_R_MAX_SPEED);
+		REQUIRE(car.GetSpeed() == -GEAR_R_MAX_SPEED);
 		car.SetGear(GEAR_N);
 		REQUIRE(car.GetGear() == GEAR_N);
 		REQUIRE(car.GetDirection() != STANDING);
@@ -256,7 +256,7 @@ SCENARIO("Setting Gear")
 		car.SetGear(GEAR_R);
 		REQUIRE(car.GetGear() == GEAR_R);
 		car.SetSpeed(GEAR_R_MAX_SPEED);
-		REQUIRE(car.GetSpeed() == GEAR_R_MAX_SPEED);
+		REQUIRE(car.GetSpeed() == -GEAR_R_MAX_SPEED);
 		car.SetGear(GEAR_N);
 		REQUIRE(car.GetGear() == GEAR_N);
 		car.SetSpeed(GEAR_N_MIN_SPEED);
@@ -275,7 +275,7 @@ SCENARIO("Setting Gear")
 		car.SetGear(GEAR_R);
 		REQUIRE(car.GetGear() == GEAR_R);
 		car.SetSpeed(GEAR_R_MAX_SPEED);
-		REQUIRE(car.GetSpeed() == GEAR_R_MAX_SPEED);
+		REQUIRE(car.GetSpeed() == -GEAR_R_MAX_SPEED);
 		car.SetGear(GEAR_2);
 		THEN("The gear is remain R")
 		{
@@ -337,10 +337,10 @@ SCENARIO("Setting speed")
 		car.SetGear(GEAR_R);
 		REQUIRE(car.GetGear() == GEAR_R);
 		car.SetSpeed(GEAR_R_MAX_SPEED);
-		REQUIRE(car.GetSpeed() == GEAR_R_MAX_SPEED);
+		REQUIRE(car.GetSpeed() == -GEAR_R_MAX_SPEED);
 		Direction directionBefore = car.GetDirection();
 		car.SetSpeed(GEAR_R_MAX_SPEED);
-		REQUIRE(car.GetSpeed() == GEAR_R_MAX_SPEED);
+		REQUIRE(car.GetSpeed() == -GEAR_R_MAX_SPEED);
 		THEN("Direction haven't to change")
 		{
 			Direction directionAfter = car.GetDirection();
