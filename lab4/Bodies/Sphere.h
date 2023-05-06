@@ -7,7 +7,10 @@ public:
 	CSphere(double density, double radius);
 
 	double GetRadius() const;
-	double GetVolume() const override;
+	double GetVolume() const;
+	std::string GetType() const override;
+
+	~CSphere();
 
 private:
 	void AppendProperties(std::ostream& strm) const override;

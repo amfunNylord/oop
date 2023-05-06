@@ -1,0 +1,7 @@
+AddBody 1 100.8 8.3 9.2
+AddBody 2 1000.2 10.5 5.5
+AddBody 3 2700 10.6 15.2 20.1
+AddBody 4 4200 10
+Info
+GetBodyWithBiggestMass
+GetLightestBodyInWater

@@ -24,25 +24,25 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Body.h">
+    <ClInclude Include="..\Body.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.h">
+    <ClInclude Include="..\Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cylinder.h">
+    <ClInclude Include="..\BodyController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cone.h">
+    <ClInclude Include="..\Cone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Parallelepiped.h">
+    <ClInclude Include="..\Cylinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BodyController.h">
+    <ClInclude Include="..\Parallelepiped.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SolidBody.h">
+    <ClInclude Include="..\SolidBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,28 +50,40 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bodies.cpp">
+    <ClCompile Include="bodies_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Body.cpp">
+    <ClCompile Include="SphereTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
+    <ClCompile Include="..\Body.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cylinder.cpp">
+    <ClCompile Include="..\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cone.cpp">
+    <ClCompile Include="..\BodyController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Parallelepiped.cpp">
+    <ClCompile Include="..\Cone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BodyController.cpp">
+    <ClCompile Include="..\Cylinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SolidBody.cpp">
+    <ClCompile Include="..\Parallelepiped.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SolidBody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParallelepipedTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConeTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CylinderTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

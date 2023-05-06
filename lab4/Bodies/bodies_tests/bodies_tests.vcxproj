@@ -11,9 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{171341E7-130A-47F3-9E44-952BDA576262}</ProjectGuid>
+    <ProjectGuid>{93656AD3-9342-41E7-A77F-9660AA6F84A8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>bodies</RootNamespace>
+    <RootNamespace>bodies_tests</RootNamespace>
+    <ProjectName>bodies_tests</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -52,11 +53,19 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>$(TargetPath) --log_level=test_suite</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -67,6 +76,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -74,30 +84,41 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>$(TargetPath) --log_level=test_suite</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Body.h" />
-    <ClInclude Include="BodyController.h" />
-    <ClInclude Include="Cone.h" />
-    <ClInclude Include="Cylinder.h" />
-    <ClInclude Include="Parallelepiped.h" />
-    <ClInclude Include="SolidBody.h" />
-    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="..\Body.h" />
+    <ClInclude Include="..\BodyController.h" />
+    <ClInclude Include="..\Cone.h" />
+    <ClInclude Include="..\Cylinder.h" />
+    <ClInclude Include="..\Parallelepiped.h" />
+    <ClInclude Include="..\SolidBody.h" />
+    <ClInclude Include="..\Sphere.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bodies.cpp" />
-    <ClCompile Include="Body.cpp" />
-    <ClCompile Include="BodyController.cpp" />
-    <ClCompile Include="Cone.cpp" />
-    <ClCompile Include="Cylinder.cpp" />
-    <ClCompile Include="Parallelepiped.cpp" />
-    <ClCompile Include="SolidBody.cpp" />
-    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="..\Body.cpp" />
+    <ClCompile Include="..\BodyController.cpp" />
+    <ClCompile Include="..\Cone.cpp" />
+    <ClCompile Include="..\Cylinder.cpp" />
+    <ClCompile Include="..\Parallelepiped.cpp" />
+    <ClCompile Include="..\SolidBody.cpp" />
+    <ClCompile Include="..\Sphere.cpp" />
+    <ClCompile Include="bodies_tests.cpp" />
+    <ClCompile Include="ConeTests.cpp" />
+    <ClCompile Include="CylinderTests.cpp" />
+    <ClCompile Include="ParallelepipedTests.cpp" />
+    <ClCompile Include="SphereTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
