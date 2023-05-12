@@ -8,7 +8,7 @@ public:
 
 	double GetBaseRadius() const;
 	double GetHeight() const;
-	double GetVolume() const override; // вы€снить и доложить про override
+	double GetVolume() const override; // вы€снить и доложить про override  лючевое слово override можно использовать дл€ обозначени€ функций-членов, которые переопредел€ют виртуальную функцию в базовом классе.
 	std::string GetType() const override;
 
 	~CCylinder();

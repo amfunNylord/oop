@@ -16,7 +16,6 @@ const std::string ERROR_NO_BODIES_ENTERED = "No bodies entered";
 
 // добавить поддержку Compound
 // добавить валидацию параметров тел
-// не так с дробной плотностью
 
 CBodyController::CBodyController(std::istream& input, std::ostream& output, std::vector<std::shared_ptr<CBody>>& bodiesVector)
 	: m_input(input)
