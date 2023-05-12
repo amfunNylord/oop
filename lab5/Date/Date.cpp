@@ -25,59 +25,14 @@ CDate::CDate(unsigned day, Month month, unsigned year)
 	{
 		m_days += (leapYear) ? 366 : 365;
 		currentYear++;
-		if (currentYear % 400 == 0)
-		{
-			leapYear = 1;
-			countYearDays = 366;
-		}
-		else
-		{
-			if (currentYear % 100 == 0)
-			{
-				leapYear = 0;
-				countYearDays = 365;
-			}
-			else
-			{
-				if (currentYear % 4 == 0)
-				{
-					leapYear = 1;
-					countYearDays = 366;
-				}
-				else
-				{
-					leapYear = 0;
-					countYearDays = 365;
-				}
-			}
-		}
+		leapYear = (currentYear % 4 || (currentYear % 100 == 0 && currentYear % 400)) ? 0 : 1;
+		countYearDays = (leapYear) ? 366 : 365;
 	}
 	Month currentMonth = Month::JANUARY;
 	unsigned currentMonthUnsigned = static_cast<unsigned>(Month::JANUARY);
 	while (currentMonth != month)
 	{
-		if (monthAndDaysCount.find(static_cast<Month>(currentMonthUnsigned))->second)
-		{
-			m_days += 31;
-		}
-		else
-		{
-			if (currentMonth == Month::FEBRUARY)
-			{
-				if (leapYear)
-				{
-					m_days += 29;
-				}
-				else
-				{
-					m_days += 28;
-				}
-			}
-			else
-			{
-				m_days += 30;
-			}
-		}
+		m_days += (monthAndDaysCount.find(currentMonth)->second) ? 31 : ((currentMonth == Month::FEBRUARY) ? ((leapYear) ? 29 : 28) : 30);
 		currentMonthUnsigned++;
 		currentMonth = static_cast<Month>(currentMonthUnsigned);
 	}
@@ -99,59 +54,14 @@ unsigned CDate::GetDay() const
 	{
 		days -= (leapYear) ? 366 : 365;
 		currentYear++;
-		if (currentYear % 400 == 0)
-		{
-			leapYear = 1;
-			countYearDays = 366;
-		}
-		else
-		{
-			if (currentYear % 100 == 0)
-			{
-				leapYear = 0;
-				countYearDays = 365;
-			}
-			else
-			{
-				if (currentYear % 4 == 0)
-				{
-					leapYear = 1;
-					countYearDays = 366;
-				}
-				else
-				{
-					leapYear = 0;
-					countYearDays = 365;
-				}
-			}
-		}
+		leapYear = (currentYear % 4 || (currentYear % 100 == 0 && currentYear % 400)) ? 0 : 1;
+		countYearDays = (leapYear) ? 366 : 365;
 	}
 	Month currentMonth = Month::JANUARY;
 	unsigned currentMonthUnsigned = static_cast<unsigned>(Month::JANUARY);
 	while (days / 28 > 0 && currentMonth != Month::DECEMBER)
 	{
-		if (monthAndDaysCount.find(static_cast<Month>(currentMonthUnsigned))->second)
-		{
-			days -= 31;
-		}
-		else
-		{
-			if (currentMonth == Month::FEBRUARY)
-			{
-				if (leapYear)
-				{
-					days -= 29;
-				}
-				else
-				{
-					days -= 28;
-				}
-			} 
-			else
-			{
-				days -= 30;
-			}
-		}
+		days -= (monthAndDaysCount.find(currentMonth)->second) ? 31 : ((currentMonth == Month::FEBRUARY) ? ((leapYear) ? 29 : 28) : 30);
 		currentMonthUnsigned++;
 		currentMonth = static_cast<Month>(currentMonthUnsigned);
 	}
@@ -170,59 +80,14 @@ Month CDate::GetMonth() const
 	{
 		days -= (leapYear) ? 366 : 365;
 		currentYear++;
-		if (currentYear % 400 == 0)
-		{
-			leapYear = 1;
-			countYearDays = 366;
-		}
-		else
-		{
-			if (currentYear % 100 == 0)
-			{
-				leapYear = 0;
-				countYearDays = 365;
-			}
-			else
-			{
-				if (currentYear % 4 == 0)
-				{
-					leapYear = 1;
-					countYearDays = 366;
-				}
-				else
-				{
-					leapYear = 0;
-					countYearDays = 365;
-				}
-			}
-		}
+		leapYear = (currentYear % 4 || (currentYear % 100 == 0 && currentYear % 400)) ? 0 : 1;
+		countYearDays = (leapYear) ? 366 : 365;
 	}
 	Month currentMonth = Month::JANUARY;
 	unsigned currentMonthUnsigned = static_cast<unsigned>(Month::JANUARY);
 	while (days / 28 > 0 && currentMonth != Month::DECEMBER)
 	{
-		if (monthAndDaysCount.find(static_cast<Month>(currentMonthUnsigned))->second)
-		{
-			days -= 31;
-		}
-		else
-		{
-			if (currentMonth == Month::FEBRUARY)
-			{
-				if (leapYear)
-				{
-					days -= 29;
-				}
-				else
-				{
-					days -= 28;
-				}
-			}
-			else
-			{
-				days -= 30;
-			}
-		}
+		days -= (monthAndDaysCount.find(currentMonth)->second) ? 31 : ((currentMonth == Month::FEBRUARY) ? ((leapYear) ? 29 : 28) : 30);
 		currentMonthUnsigned++;
 		currentMonth = static_cast<Month>(currentMonthUnsigned);
 	}
@@ -239,32 +104,8 @@ unsigned CDate::GetYear() const
 	{
 		days -= (leapYear) ? 366 : 365; 
 		currentYear++;
-		if (currentYear % 400 == 0)
-		{
-			leapYear = 1;
-			countYearDays = 366;
-		}
-		else
-		{
-			if (currentYear % 100 == 0)
-			{
-				leapYear = 0;
-				countYearDays = 365;
-			}
-			else
-			{
-				if (currentYear % 4 == 0)
-				{
-					leapYear = 1;
-					countYearDays = 366;
-				}
-				else
-				{
-					leapYear = 0;
-					countYearDays = 365;
-				}
-			}
-		}
+		leapYear = (currentYear % 4 || (currentYear % 100 == 0 && currentYear % 400)) ? 0 : 1;
+		countYearDays = (leapYear) ? 366 : 365;
 	}
 	return currentYear;
 }
@@ -282,11 +123,7 @@ unsigned CDate::GetDays() const
 
 bool CDate::IsValid() const
 {
-	if (m_days < 0 || m_days > 2932896)
-	{
-		return false;
-	}
-	return true;
+	return (m_days > 2932896) ? false : true;
 }
 
 CDate::~CDate()
@@ -398,50 +235,9 @@ std::istream& operator>>(std::istream& stream, CDate& date)
 	bool leapYear;
 	if ((stream >> day) && (stream.get() == '.') && (stream >> monthUnsigned) && (stream.get() == '.') && (stream >> year))
 	{
-		if (year % 400 == 0)
-		{
-			leapYear = 1;
-		}
-		else
-		{
-			if (year % 100 == 0)
-			{
-				leapYear = 0;
-			}
-			else
-			{
-				if (year % 4 == 0)
-				{
-					leapYear = 1;
-				}
-				else
-				{
-					leapYear = 0;
-				}
-			}
-		}
-		if (monthAndDaysCount.find(static_cast<Month>(monthUnsigned))->second)
-		{
-			daysCountInMonth = 31;
-		}
-		else
-		{
-			if (static_cast<Month>(monthUnsigned) == Month::FEBRUARY)
-			{
-				if (leapYear)
-				{
-					daysCountInMonth = 29;
-				}
-				else
-				{
-					daysCountInMonth = 28;
-				}
-			}
-			else
-			{
-				daysCountInMonth = 30;
-			}
-		}
+		leapYear = (year % 4 || (year % 100 == 0 && year % 400)) ? 0 : 1;
+		Month month = static_cast<Month>(monthUnsigned);
+		daysCountInMonth = (monthAndDaysCount.find(month)->second) ? 31 : ((month == Month::FEBRUARY) ? ((leapYear) ? 29 : 28) : 30);
 		if (day > daysCountInMonth || monthUnsigned > 12 || year > 9999)
 		{
 			stream.setstate(std::ios_base::failbit | stream.rdstate());
@@ -449,7 +245,6 @@ std::istream& operator>>(std::istream& stream, CDate& date)
 		}
 		else
 		{
-			Month month = static_cast<Month>(monthUnsigned);
 			date = CDate(day, month, year);
 		}
 	}
