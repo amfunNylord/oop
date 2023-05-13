@@ -1,5 +1,7 @@
 #include "Date.h"
+const unsigned MAX_DAYS_COUNT = 2932896;
 
+// поменять название
 const std::map<Month, bool> monthAndDaysCount = {
 	{ Month::JANUARY, 1 },
 	{ Month::FEBRUARY, 0},
@@ -15,18 +17,18 @@ const std::map<Month, bool> monthAndDaysCount = {
 	{ Month::DECEMBER, 1 }
 };
 
+// вынести в константы переменные
+// лучше использовать true false bool
 CDate::CDate(unsigned day, Month month, unsigned year)
 {
 	m_days = 0;
 	bool leapYear = 0;
-	unsigned countYearDays = 365;
 	unsigned currentYear = 1970;
 	while (currentYear != year)
 	{
 		m_days += (leapYear) ? 366 : 365;
 		currentYear++;
 		leapYear = (currentYear % 4 || (currentYear % 100 == 0 && currentYear % 400)) ? 0 : 1;
-		countYearDays = (leapYear) ? 366 : 365;
 	}
 	Month currentMonth = Month::JANUARY;
 	unsigned currentMonthUnsigned = static_cast<unsigned>(Month::JANUARY);
@@ -52,7 +54,7 @@ unsigned CDate::GetDay() const
 	unsigned days = m_days;
 	while (days / countYearDays > 0)
 	{
-		days -= (leapYear) ? 366 : 365;
+		days -= countYearDays;
 		currentYear++;
 		leapYear = (currentYear % 4 || (currentYear % 100 == 0 && currentYear % 400)) ? 0 : 1;
 		countYearDays = (leapYear) ? 366 : 365;
@@ -78,7 +80,7 @@ Month CDate::GetMonth() const
 	unsigned days = m_days;
 	while (days / countYearDays > 0)
 	{
-		days -= (leapYear) ? 366 : 365;
+		days -= countYearDays;
 		currentYear++;
 		leapYear = (currentYear % 4 || (currentYear % 100 == 0 && currentYear % 400)) ? 0 : 1;
 		countYearDays = (leapYear) ? 366 : 365;
@@ -102,7 +104,7 @@ unsigned CDate::GetYear() const
 	unsigned days = m_days;
 	while (days / countYearDays > 0)
 	{
-		days -= (leapYear) ? 366 : 365; 
+		days -= countYearDays;
 		currentYear++;
 		leapYear = (currentYear % 4 || (currentYear % 100 == 0 && currentYear % 400)) ? 0 : 1;
 		countYearDays = (leapYear) ? 366 : 365;
@@ -120,10 +122,11 @@ unsigned CDate::GetDays() const
 {
 	return m_days;
 }
-
+// вынести в константу
+// лишний тернарный оператор
 bool CDate::IsValid() const
 {
-	return (m_days > 2932896) ? false : true;
+	return !(m_days > MAX_DAYS_COUNT);
 }
 
 CDate::~CDate()
@@ -217,7 +220,7 @@ std::ostream& operator<<(std::ostream& stream, CDate const& date)
 {
 	if (date.IsValid())
 	{
-		stream << date.GetDay() << '.' << static_cast<int>(date.GetMonth()) << '.' << date.GetYear() << std::endl;
+		stream << date.GetDay() << '.' << static_cast<unsigned>(date.GetMonth()) << '.' << date.GetYear() << std::endl;
 	}
 	else
 	{
@@ -226,6 +229,7 @@ std::ostream& operator<<(std::ostream& stream, CDate const& date)
 	return stream;
 }
 
+// вынести в отдельный метод на високосный 
 std::istream& operator>>(std::istream& stream, CDate& date)
 {
 	unsigned day;

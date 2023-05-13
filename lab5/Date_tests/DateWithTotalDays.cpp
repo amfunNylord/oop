@@ -40,14 +40,14 @@ BOOST_FIXTURE_TEST_SUITE(DateWithTotalDays, Date_)
 		date++;
 		BOOST_CHECK_EQUAL(date.GetDays(), timestamp + 1);
 	}
-	// проверка работоспособности префиксной формы инкремента
+	// проверка работоспособности префиксной формы декремента
 	BOOST_AUTO_TEST_CASE(works_prefix_decrement)
 	{
 		BOOST_CHECK_EQUAL(date.GetDays(), timestamp);
 		--date;
 		BOOST_CHECK_EQUAL(date.GetDays(), timestamp - 1);
 	}
-	// проверка работоспособности постфиксной формы инкремента
+	// проверка работоспособности постфиксной формы декремента
 	BOOST_AUTO_TEST_CASE(works_postfix_decrement)
 	{
 		BOOST_CHECK_EQUAL(date.GetDays(), timestamp);
