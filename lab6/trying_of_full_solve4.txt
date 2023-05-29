@@ -1,0 +1,252 @@
+#include "Solve4.h"
+#include <math.h>
+#include <stdexcept>
+#include <iostream>
+
+EquationRoot4 Solve4(double a0, double a1, double a2, double a3, double a4)
+{
+	if (a0 == 0)
+	{
+		throw std::invalid_argument("The coefficient at the variable to the fourth degree cannot be zero");
+	}
+	EquationRoot4 result;
+
+	if (a1 == 0 && a2 == 0 && a3 == 0 && a4 == 0)
+	{
+		result.numRoots = 1;
+		result.roots[0] = 0;
+		return result;
+	}
+
+	if (a1 == 0 && a2 == 0 && a3 == 0)
+	{
+		if (-a4 < 0)
+		{
+			throw std::invalid_argument("The expression below the sqrt cannot be less than zero");
+		}
+		double root1 = sqrt(sqrt(-a4));
+		double root2 = -root1;
+		result.numRoots = 2;
+		result.roots[0] = round(root1 * 10000) / 10000;
+		result.roots[1] = round(root2 * 10000) / 10000;
+		return result;
+	}
+
+	if (a1 == 0 && a2 == 0 && a4 == 0)
+	{
+		result.numRoots = 2;
+		result.roots[0] = 0;
+		double freeMember = a3 / a0;
+		double root2 = pow(freeMember, 1 / 3.0);
+		if (a3 > 0)
+		{
+			root2 = -root2;
+		}
+		result.roots[1] = round(root2 * 10000) / 10000;
+		return result;
+	}
+
+	if (a2 == 0 && a3 == 0 && a4 == 0)
+	{
+		result.numRoots = 2;
+		result.roots[0] = 0;
+		double root2 = -a1 / a0;
+		result.roots[1] = round(root2 * 10000) / 10000;
+		return result;
+	}
+
+	if (a1 == 0 && a3 == 0)
+	{
+		if (a4 == 0)
+		{
+			result.roots[0] = 0;
+			if (-a2 / a0 < 0)
+			{
+				result.numRoots = 1;
+				return result;
+			}
+			else
+			{
+				result.numRoots = 3;
+				double root2 = sqrt(-a2 / a0);
+				double root3 = -root2;
+				result.roots[1] = round(root2 * 10000) / 10000;
+				result.roots[2] = round(root3 * 10000) / 10000;
+				return result;
+			}
+		}
+
+		double d = pow(a2, 2) - 4 * a0 * a4;
+		if (d < 0)
+		{
+			throw std::invalid_argument("Discriminant cannot be less than zero");
+		}
+		double y1 = (-a2 + sqrt(d)) / (2 * a0);
+		double y2 = (-a2 - sqrt(d)) / (2 * a0);
+		result.numRoots = 4;
+		double root1 = sqrt(y1);
+		double root2 = -root1;
+		double root3 = sqrt(y2);
+		double root4 = -root3;
+		result.roots[0] = round(root1 * 10000) / 10000;
+		result.roots[1] = round(root2 * 10000) / 10000;
+		result.roots[2] = round(root3 * 10000) / 10000;
+		result.roots[3] = round(root4 * 10000) / 10000;
+		return result;
+	}
+
+	double a = a1 / a0,
+		   b = a2 / a0,
+		   c = a3 / a0,
+		   d = a4 / a0;
+
+	double p = b - 3 * pow(a, 2) / 8,
+		   q = pow(a, 3) / 8 - a * b / 2 + c,
+		   r = -(3 * pow(a, 4) / 256) + pow(a, 2) * b / 16 - c * a / 4 + d;
+
+	double s2 = -p / 2,
+		  s1 = -r,
+		  s0 = (r * p - pow(q, 2) / 4) / 2;
+
+	int negativeS0 = (s0 < 0) ? static_cast<int>(s0) : static_cast<int>(-s0);
+
+	for (int i = negativeS0; i < -s0; i++)
+	{
+		if (fmod(s0, i) == 0.0)
+		{
+			if ((pow(i, 3) + s2 * pow(i, 2) + s1 * i + s0) == 0)
+			{
+				double y1_1 = -(sqrt(2 * i - p));
+				double y0_1 = q / (2 * sqrt(2 * i - p)) + i;
+				double y1_2 = sqrt(2 * i - p);
+				double y0_2 = -(q / (2 * sqrt(2 * i - p))) + i;
+
+				result.numRoots = 4;
+
+				double d1 = pow(y1_1, 2) - 4 * y0_1;
+				if (d1 < 0)
+				{
+					throw std::invalid_argument("Discriminant cannot be less than zero");
+				}
+				double root1 = (-y1_1 + sqrt(d1)) / 2 - 1;
+				double root2 = (-y1_1 - sqrt(d1)) / 2 - 1;
+
+				double d2 = pow(y1_2, 2) - 4 * y0_2;
+				if (d2 < 0)
+				{
+					throw std::invalid_argument("Discriminant cannot be less than zero");
+				}
+				double root3 = (-y1_2 + sqrt(d2)) / 2 - 1;
+				double root4 = (-y1_2 - sqrt(d2)) / 2 - 1;
+
+				result.roots[0] = round(root1 * 10000) / 10000;
+				result.roots[1] = round(root2 * 10000) / 10000;
+				result.roots[2] = round(root3 * 10000) / 10000;
+				result.roots[3] = round(root4 * 10000) / 10000;
+				return result;
+			}
+		}
+	}
+
+	return EquationRoot4();
+ }
+
+BOOST_AUTO_TEST_CASE(Solving_a_bipartite_4th_degree_equation)
+{
+	const double firstCoef = 1,
+				 secondCoef = 0,
+				 thirdCoef = 0,
+				 fourthCoef = 0,
+				 fifthCoef = -16;
+    const double expectedRootCount = 2;
+	const double expectedFirstRoot = 2;
+	const double expectedSecondRoot = -2;
+	EquationRoot4 result = Solve4(firstCoef, secondCoef, thirdCoef, fourthCoef, fifthCoef);
+	BOOST_CHECK_EQUAL(result.numRoots, expectedRootCount);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[0], expectedFirstRoot, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[1], expectedSecondRoot, 1e-7);
+}
+
+BOOST_AUTO_TEST_CASE(Solving_a_biquadratic_equation)
+{
+	const double firstCoef = 1,
+				 secondCoef = 0,
+				 thirdCoef = -10,
+				 fourthCoef = 0,
+				 fifthCoef = 9;
+	const double expectedRootCount = 4;
+	const double expectedFirstRoot = 3;
+	const double expectedSecondRoot = -3;
+	const double expectedThirdRoot = 1;
+	const double expectedFourthRoot = -1;
+	EquationRoot4 result = Solve4(firstCoef, secondCoef, thirdCoef, fourthCoef, fifthCoef);
+	BOOST_CHECK_EQUAL(result.numRoots, expectedRootCount);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[0], expectedFirstRoot, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[1], expectedSecondRoot, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[2], expectedThirdRoot, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[3], expectedFourthRoot, 1e-7);
+}
+
+BOOST_AUTO_TEST_CASE(Solving_equation_with_zero_coefficients_in_3_2_0_degrees)
+{
+	const double firstCoef = 2,
+				 secondCoef = 0,
+				 thirdCoef = 0,
+				 fourthCoef = 3,
+				 fifthCoef = 0;
+	const double expectedRootCount = 2;
+	const double expectedFirstRoot = 0;
+	const double expectedSecondRoot = -1.1447;
+	EquationRoot4 result = Solve4(firstCoef, secondCoef, thirdCoef, fourthCoef, fifthCoef);
+	BOOST_CHECK_EQUAL(result.numRoots, expectedRootCount);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[0], expectedFirstRoot, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[1], expectedSecondRoot, 1e-7);
+}
+
+BOOST_AUTO_TEST_CASE(Solving_equation_with_zero_coefficients_in_2_1_0_degrees)
+{
+	const double firstCoef = 2,
+				 secondCoef = 1,
+				 thirdCoef = 0,
+				 fourthCoef = 0,
+				 fifthCoef = 0;
+	const double expectedRootCount = 2;
+	const double expectedFirstRoot = 0;
+	const double expectedSecondRoot = -0.5;
+	EquationRoot4 result = Solve4(firstCoef, secondCoef, thirdCoef, fourthCoef, fifthCoef);
+	BOOST_CHECK_EQUAL(result.numRoots, expectedRootCount);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[0], expectedFirstRoot, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[1], expectedSecondRoot, 1e-7);
+}
+
+BOOST_AUTO_TEST_CASE(Solving_equation_with_zero_coefficients_in_3_1_0_degrees_3_roots)
+{
+	const double firstCoef = 5,
+				 secondCoef = 0,
+				 thirdCoef = -3,
+				 fourthCoef = 0,
+				 fifthCoef = 0;
+	const double expectedRootCount = 3;
+	const double expectedFirstRoot = 0;
+	const double expectedSecondRoot = 0.7746;
+	const double expectedThirdRoot = -0.7746;
+	EquationRoot4 result = Solve4(firstCoef, secondCoef, thirdCoef, fourthCoef, fifthCoef);
+	BOOST_CHECK_EQUAL(result.numRoots, expectedRootCount);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[0], expectedFirstRoot, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[1], expectedSecondRoot, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[2], expectedThirdRoot, 1e-7);
+}
+
+BOOST_AUTO_TEST_CASE(Solving_equation_with_zero_coefficients_in_3_1_0_degrees_1_root)
+{
+	const double firstCoef = 5,
+				 secondCoef = 0,
+				 thirdCoef = 3,
+				 fourthCoef = 0,
+				 fifthCoef = 0;
+	const double expectedRootCount = 1;
+	const double expectedFirstRoot = 0;
+	EquationRoot4 result = Solve4(firstCoef, secondCoef, thirdCoef, fourthCoef, fifthCoef);
+	BOOST_CHECK_EQUAL(result.numRoots, expectedRootCount);
+	BOOST_CHECK_CLOSE_FRACTION(result.roots[0], expectedFirstRoot, 1e-7);
+}
