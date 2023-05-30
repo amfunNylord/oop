@@ -250,3 +250,5 @@ BOOST_AUTO_TEST_CASE(Solving_equation_with_zero_coefficients_in_3_1_0_degrees_1_
 	BOOST_CHECK_EQUAL(result.numRoots, expectedRootCount);
 	BOOST_CHECK_CLOSE_FRACTION(result.roots[0], expectedFirstRoot, 1e-7);
 }
+
+https://github.com/Andreanapolicy/cg/blob/master/lab7/Figures/Solver.cpp
