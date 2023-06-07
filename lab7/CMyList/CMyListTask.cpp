@@ -1,4 +1,5 @@
 #include <iostream>
+#include "CMyList.h"
 
 int main()
 {
