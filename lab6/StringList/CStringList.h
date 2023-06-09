@@ -5,12 +5,10 @@
 #include "CStringListReverseIterator.h"
 #include "CStringListReverseConstIterator.h"
 
-//  итераторы консатантные + tests
-
 class CStringList
 {
 public:
-	size_t GetSize() const;
+	size_t GetSize() const;	
 	bool IsEmpty() const;
 	void InsertFront(const std::string& data);
 	void InsertBack(const std::string& data);
@@ -25,7 +23,7 @@ public:
 	// move constructor
 	CStringList(CStringList&& other) noexcept;
 	// destructor
-	~CStringList();
+	~CStringList() noexcept;
 
 	// copy assignment 
 	CStringList& operator=(const CStringList& other);

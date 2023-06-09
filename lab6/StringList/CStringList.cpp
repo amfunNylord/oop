@@ -145,7 +145,6 @@ void CStringList::Erase(CStringListIterator iter)
 	delete iter.m_node;
 	leftNode->next = rightNode;
 	rightNode->prev = leftNode;
-
 }
 
 CStringList::~CStringList()

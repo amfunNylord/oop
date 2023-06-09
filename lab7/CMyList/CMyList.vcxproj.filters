@@ -23,5 +23,14 @@
     <ClInclude Include="CMyList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CMyListNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMyListIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMyListReverseIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

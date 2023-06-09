@@ -1,20 +1,43 @@
-// CMyList_tests.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// lab6_tests.cpp: определяет точку входа для консольного приложения.
 //
 
-#include <iostream>
+#include "stdafx.h"
+#include <boost/test/output/compiler_log_formatter.hpp>
 
-int main()
+/*
+Данный класс управляет формаитрованием журнала запуска тестов
+Для того, чтобы увидеть результат, приложение должно быть запущено с ключём --log_level=test_suite (см. Post-build event в настройках проекта)
+*/
+class SpecLogFormatter : public boost::unit_test::output::compiler_log_formatter
 {
-    std::cout << "Hello World!\n";
+	virtual void test_unit_start(std::ostream& os, boost::unit_test::test_unit const& tu) override
+	{
+		// перед запуском test unit-а выводим имя test unit-а, заменяя символ подчеркивания на пробел
+		os << std::string(m_indent, ' ') << boost::replace_all_copy(tu.p_name.get(), "_", " ") << std::endl;
+		// увеличиваем отступ для вывода имен последующих test unit-ов в виде дерева
+		m_indent += 2;
+	}
+
+	virtual void test_unit_finish(std::ostream& /*os*/, boost::unit_test::test_unit const& /*tu*/, unsigned long /*elapsed*/) override
+	{
+		// по окончании test unit-а уменьшаем отступ
+		m_indent -= 2;
+	}
+
+	int m_indent = 0;
+};
+
+boost::unit_test::test_suite* init_unit_test_suite(int /*argc*/, char* /*argv*/[])
+{
+	// Заменили имя log formatter на пользовательский
+	boost::unit_test::unit_test_log.set_formatter(new SpecLogFormatter);
+	// Имя корневого набора тестов - All tests
+	boost::unit_test::framework::master_test_suite().p_name.value = "All tests";
+	return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+int main(int argc, char* argv[])
+{
+	// Запускаем тесты, передавая параметры командной строки и кастомную функцию инициализации тестов
+	return boost::unit_test::unit_test_main(&init_unit_test_suite, argc, argv);
+}

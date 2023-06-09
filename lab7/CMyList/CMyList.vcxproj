@@ -131,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMyList.h" />
+    <ClInclude Include="CMyListIterator.h" />
+    <ClInclude Include="CMyListNode.h" />
+    <ClInclude Include="CMyListReverseIterator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
