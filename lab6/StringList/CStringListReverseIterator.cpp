@@ -5,11 +5,6 @@ CStringListReverseIterator::CStringListReverseIterator(Node* node)
 {
 }
 
-CStringListReverseIterator::CStringListReverseIterator(const CStringListReverseIterator& iter)
-	: m_node(iter.m_node)
-{
-}
-
 CStringListReverseIterator::reference CStringListReverseIterator::operator*() const
 {
 	return m_node->data;

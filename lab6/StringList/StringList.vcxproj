@@ -128,15 +128,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CStringList.cpp" />
+    <ClCompile Include="CStringListConstIterator.cpp" />
     <ClCompile Include="CStringListIterator.cpp" />
     <ClCompile Include="CStringListNode.cpp" />
+    <ClCompile Include="CStringListReverseConstIterator.cpp" />
     <ClCompile Include="CStringListReverseIterator.cpp" />
     <ClCompile Include="StringList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CStringList.h" />
+    <ClInclude Include="CStringListConstIterator.h" />
     <ClInclude Include="CStringListIterator.h" />
     <ClInclude Include="CStringListNode.h" />
+    <ClInclude Include="CStringListReverseConstIterator.h" />
     <ClInclude Include="CStringListReverseIterator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

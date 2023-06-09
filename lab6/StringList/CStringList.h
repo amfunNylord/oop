@@ -1,7 +1,9 @@
 #pragma once
 #include "CStringListNode.h"
 #include "CStringListIterator.h"
+#include "CStringListConstIterator.h"
 #include "CStringListReverseIterator.h"
+#include "CStringListReverseConstIterator.h"
 
 //  итераторы консатантные + tests
 
@@ -33,15 +35,14 @@ public:
 	CStringListIterator begin() const;
 	CStringListIterator end() const;
 
-	const CStringListIterator cbegin() const;
-	const CStringListIterator cend() const;
+	CStringListConstIterator cbegin() const;
+	CStringListConstIterator cend() const;
 
 	CStringListReverseIterator rbegin() const;
 	CStringListReverseIterator rend() const;
 
-	const CStringListReverseIterator crbegin() const;
-	const CStringListReverseIterator crend() const;
-
+	CStringListReverseConstIterator crbegin() const;
+	CStringListReverseConstIterator crend() const;
 
 private:
 	size_t m_size = 0;

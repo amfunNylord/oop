@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solve4", "Solve4\Solve4.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solve4_tests", "Solve4_tests\Solve4_tests.vcxproj", "{65A8812B-ADBA-4B2D-93C0-07F1AFDABC43}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab6", "string_list\lab6\lab6.vcxproj", "{2A1C6369-4537-49D3-B139-BFB384EE44EA}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringList", "StringList\StringList.vcxproj", "{15C71E4A-E5A8-40DE-9FD3-EAAA8B9232A9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringList_tests", "StringList_tests\StringList_tests.vcxproj", "{E0EE76B4-00C9-4A30-B95F-D926008113C8}"
@@ -37,14 +35,6 @@ Global
 		{65A8812B-ADBA-4B2D-93C0-07F1AFDABC43}.Release|x64.Build.0 = Release|x64
 		{65A8812B-ADBA-4B2D-93C0-07F1AFDABC43}.Release|x86.ActiveCfg = Release|Win32
 		{65A8812B-ADBA-4B2D-93C0-07F1AFDABC43}.Release|x86.Build.0 = Release|Win32
-		{2A1C6369-4537-49D3-B139-BFB384EE44EA}.Debug|x64.ActiveCfg = Debug|x64
-		{2A1C6369-4537-49D3-B139-BFB384EE44EA}.Debug|x64.Build.0 = Debug|x64
-		{2A1C6369-4537-49D3-B139-BFB384EE44EA}.Debug|x86.ActiveCfg = Debug|Win32
-		{2A1C6369-4537-49D3-B139-BFB384EE44EA}.Debug|x86.Build.0 = Debug|Win32
-		{2A1C6369-4537-49D3-B139-BFB384EE44EA}.Release|x64.ActiveCfg = Release|x64
-		{2A1C6369-4537-49D3-B139-BFB384EE44EA}.Release|x64.Build.0 = Release|x64
-		{2A1C6369-4537-49D3-B139-BFB384EE44EA}.Release|x86.ActiveCfg = Release|Win32
-		{2A1C6369-4537-49D3-B139-BFB384EE44EA}.Release|x86.Build.0 = Release|Win32
 		{15C71E4A-E5A8-40DE-9FD3-EAAA8B9232A9}.Debug|x64.ActiveCfg = Debug|x64
 		{15C71E4A-E5A8-40DE-9FD3-EAAA8B9232A9}.Debug|x64.Build.0 = Debug|x64
 		{15C71E4A-E5A8-40DE-9FD3-EAAA8B9232A9}.Debug|x86.ActiveCfg = Debug|Win32

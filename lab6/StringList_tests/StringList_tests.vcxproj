@@ -140,8 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\StringList\CStringList.cpp" />
+    <ClCompile Include="..\StringList\CStringListConstIterator.cpp" />
     <ClCompile Include="..\StringList\CStringListIterator.cpp" />
     <ClCompile Include="..\StringList\CStringListNode.cpp" />
+    <ClCompile Include="..\StringList\CStringListReverseConstIterator.cpp" />
     <ClCompile Include="..\StringList\CStringListReverseIterator.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="StringListTests.cpp" />
@@ -149,8 +151,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\StringList\CStringList.h" />
+    <ClInclude Include="..\StringList\CStringListConstIterator.h" />
     <ClInclude Include="..\StringList\CStringListIterator.h" />
     <ClInclude Include="..\StringList\CStringListNode.h" />
+    <ClInclude Include="..\StringList\CStringListReverseConstIterator.h" />
     <ClInclude Include="..\StringList\CStringListReverseIterator.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

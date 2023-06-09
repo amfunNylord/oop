@@ -13,8 +13,6 @@ public:
 	using reference = value_type&;
 
 	CStringListIterator(Node* node);
-	CStringListIterator(const CStringListIterator& iter);
-	CStringListIterator() = default;
 	reference operator*() const;
 	pointer operator->() const;
 
@@ -28,5 +26,5 @@ public:
 	bool operator!=(CStringListIterator const& other) const;
 
 private:
-	Node* m_node = nullptr;
+	Node* m_node;
 };

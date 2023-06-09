@@ -13,8 +13,6 @@ public:
 	using reference = value_type&;
 
 	CStringListReverseIterator(Node* node);
-	CStringListReverseIterator(const CStringListReverseIterator& iter);
-	CStringListReverseIterator() = default;
 	reference operator*() const;
 	pointer operator->() const;
 
@@ -28,5 +26,5 @@ public:
 	bool operator!=(CStringListReverseIterator const& other) const;
 
 private:
-	Node* m_node = nullptr;
+	Node* m_node;
 };

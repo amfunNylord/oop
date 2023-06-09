@@ -163,19 +163,19 @@ CStringListIterator CStringList::end() const
 	return CStringListIterator(m_lastNode);
 }
 
-const CStringListIterator CStringList::cbegin() const
+CStringListConstIterator CStringList::cbegin() const
 {
-	return CStringListIterator(m_firstNode);
+	return CStringListConstIterator(m_firstNode);
 }
 
-const CStringListIterator CStringList::cend() const
+CStringListConstIterator CStringList::cend() const
 {
-	return CStringListIterator(m_lastNode);
+	return CStringListConstIterator(m_lastNode);
 }
 
 CStringListReverseIterator CStringList::rbegin() const
 {
-	return CStringListReverseIterator(m_lastNode->prev);
+	return CStringListReverseIterator(m_lastNode);
 }
 
 CStringListReverseIterator CStringList::rend() const
@@ -183,12 +183,13 @@ CStringListReverseIterator CStringList::rend() const
 	return CStringListReverseIterator(m_firstNode);
 }
 
-const CStringListReverseIterator CStringList::crbegin() const
+CStringListReverseConstIterator CStringList::crbegin() const
 {
-	return CStringListReverseIterator(m_lastNode->prev);
+	return CStringListReverseConstIterator(m_lastNode);
 }
 
-const CStringListReverseIterator CStringList::crend() const
+CStringListReverseConstIterator CStringList::crend() const
 {
-	return CStringListReverseIterator(m_firstNode);
+	return CStringListReverseConstIterator(m_firstNode);
 }
+
