@@ -31,7 +31,18 @@ public:
 
 	CMyListIterator& operator++()
 	{
-		m_node = m_node->next;
+		try
+		{
+			if (m_node->next == nullptr)
+			{
+				throw std::runtime_error("Iterator is out of range");
+			}
+			m_node = m_node->next;
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << "Error: " << e.what() << std::endl;
+		}
 		return *this;
 	}
 	CMyListIterator operator++(int)
@@ -42,7 +53,18 @@ public:
 	}
 	CMyListIterator& operator--()
 	{
-		m_node = m_node->prev;
+		try
+		{
+			if (m_node->prev == nullptr)
+			{
+				throw std::runtime_error("Iterator is out of range");
+			}
+			m_node = m_node->prev;
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << "Error: " << e.what() << std::endl;
+		}
 		return *this;
 	}
 	CMyListIterator operator--(int)

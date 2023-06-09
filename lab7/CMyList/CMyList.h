@@ -15,10 +15,10 @@ public:
 			{
 				InsertBack(el);
 			}
-			catch (...)
+			catch (const std::exception&)
 			{
 				Clear();
-				throw;
+				throw std::bad_alloc("Not enough memory");
 			}
 		}
 	}

@@ -3,6 +3,11 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
-	CMyList<std::string> list;
+	CMyList<int> list;
+	list.InsertBack(1);
+	list.InsertBack(1);
+	auto iter = list.begin();
+	++iter;
+	++iter;
+	++iter;
 }
