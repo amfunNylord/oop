@@ -22,6 +22,10 @@ public:
 	}
 	reference operator*() const
 	{
+		if (m_node->next == nullptr)
+		{
+			return m_node->prev->data;
+		}
 		return m_node->data;
 	}
 	pointer operator->() const

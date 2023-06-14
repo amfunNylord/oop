@@ -141,10 +141,10 @@ BOOST_FIXTURE_TEST_SUITE(String_list, EmptyStringList)
 			BOOST_CHECK_EQUAL(*iter, "first");
 
 			iter = list.end();
-			BOOST_CHECK_EQUAL(*--iter, "third");
+			BOOST_CHECK_EQUAL(*iter, "third");
 
 			auto reverseIter = list.rbegin();
-			BOOST_CHECK_EQUAL(*++reverseIter, "third");
+			BOOST_CHECK_EQUAL(*reverseIter, "third");
 
 			reverseIter = list.rend();
 			BOOST_CHECK_EQUAL(*reverseIter, "first");

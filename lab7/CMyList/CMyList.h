@@ -1,7 +1,7 @@
 #pragma once
 #include "CMyListIterator.h"
 #include "CMyListReverseIterator.h"
-
+#include <list>
 template <typename T>
 class CMyList
 {
@@ -15,10 +15,13 @@ public:
 			{
 				InsertBack(el);
 			}
+			// поймали любое исключение, нужно то которое пойманоv - ?
+			// дестркутор не вызовется - +
 			catch (const std::exception&)
 			{
-				Clear();
-				throw std::bad_alloc("Not enough memory");
+				/*Clear();*/
+				this->~CMyList();
+				throw;
 			}
 		}
 	}
@@ -26,8 +29,9 @@ public:
 	{
 		if (std::addressof(other) != this)
 		{
-			Clear();
+			// если выбросилось искл то потеряли старое значение
 			CMyList tmpCopy(other);
+			Clear();
 			std::swap(m_size, tmpCopy.m_size);
 			std::swap(m_firstNode, tmpCopy.m_firstNode);
 			std::swap(m_lastNode, tmpCopy.m_lastNode);
@@ -38,6 +42,8 @@ public:
 	~CMyList() noexcept
 	{
 		Clear();
+		delete m_lastNode;
+		m_lastNode = nullptr;
 	}
 
 	CMyListIterator<T> begin() const
@@ -57,7 +63,7 @@ public:
 		return CMyListReverseIterator<T>(m_firstNode);
 	}
 
-	size_t GetSize() const 
+	size_t GetSize() const
 	{
 		return m_size;
 	};
@@ -77,46 +83,56 @@ public:
 	{
 		if (!IsEmpty())
 		{
-			Node<T>* exLastNode = m_lastNode;
-			m_lastNode = m_lastNode->prev;
-			m_lastNode->next = nullptr;
-			delete exLastNode;
+			m_lastNode->prev->next = nullptr;
 			while (m_firstNode != nullptr)
-			{	
+			{
 				Node<T>* tempNode = m_firstNode->next;
 				delete m_firstNode;
 				m_firstNode = tempNode;
 			}
+			m_lastNode->prev = nullptr;
+			m_size = 0;
 		}
-		else
-		{
-			delete m_lastNode;
-		}
-		m_size = 0;
-		m_firstNode = m_lastNode = nullptr;
 	}
 	void Insert(CMyListIterator<T> iter, const T& data)
 	{
-		m_size++;
-		if (iter.m_node != nullptr && iter.m_node->data != T() && iter.m_node->prev == nullptr)
+		// если исключение то ++ не сработает - +
+		// дублирование new - +
+		// сделать зацикливание
+		Node<T>* newNode = new Node<T>(data, nullptr, nullptr);
+		if (m_size != 0)
 		{
-			Node<T>* newNode = new Node<T>(data, nullptr, m_firstNode);
-			m_firstNode->prev = newNode;
-			m_firstNode = newNode;
-			return;
+			m_size++;
+			if (iter.m_node->next == nullptr)
+			{
+				newNode->next = m_lastNode;
+				m_lastNode->prev->next = newNode;
+				newNode->prev = m_lastNode->prev;
+				m_lastNode->prev = newNode;
+				return;
+			}
+			if (iter.m_node->prev == nullptr)
+			{
+				newNode->next = m_firstNode;
+				m_firstNode->prev = newNode;
+				m_firstNode = newNode;
+				return;
+			}
+			
+			Node<T>* leftNode = iter.m_node->prev;
+			Node<T>* rightNode = iter.m_node;
+			newNode->prev = leftNode;
+			newNode->next = rightNode;
+			leftNode->next = newNode;
+			rightNode->prev = newNode;
 		}
-		if (iter.m_node == nullptr || iter.m_node->prev == nullptr)
+		else
 		{
-			Node<T>* newNode = new Node<T>(data, nullptr, m_lastNode);
+			m_size++;
 			m_firstNode = newNode;
-			m_lastNode->prev = newNode;
-			return;
+			m_firstNode->next = m_lastNode;
+			m_lastNode->prev = m_firstNode;
 		}
-		Node<T>* leftNode = iter.m_node->prev;
-		Node<T>* rightNode = iter.m_node;
-		Node<T>* newNode = new Node<T>(data, leftNode, rightNode);
-		leftNode->next = newNode;
-		rightNode->prev = newNode;
 	}
 	void Erase(CMyListIterator<T> iter)
 	{
@@ -148,5 +164,5 @@ public:
 
 private:
 	size_t m_size = 0;
-	Node<T> *m_firstNode = nullptr, *m_lastNode = new Node<T>(T(), nullptr, nullptr);
+	Node<T>*m_firstNode = nullptr, *m_lastNode = new Node<T>(T(), nullptr, nullptr);
 };
