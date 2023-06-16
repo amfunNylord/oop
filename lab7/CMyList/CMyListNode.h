@@ -1,17 +1,18 @@
 #pragma once
 #include <iostream>
-#include <new>
+#include <optional>
+//#include <new>
 
 template <typename T>
 struct Node
 {
-	T data;
-	Node<T> *prev, *next;
+	std::optional<T> data;
+	Node<T> *prev = nullptr, *next = nullptr;
+	
+	Node() = default;
 
-	Node(const T data, Node* prev, Node* next)
+	Node(const std::optional<T>& data)
 		: data(data)
-		, prev(prev)
-		, next(next)
 	{
 	}
 };

@@ -21,13 +21,13 @@ public:
 	{
 		if (m_node->next == nullptr)
 		{
-			return m_node->prev->data;
+			return m_node->prev->data.value();
 		}
-		return m_node->data;
+		return m_node->data.value();
 	}
 	pointer operator->() const
 	{
-		return &m_node->data;
+		return &m_node->data.value();
 	}
 
 	CMyListReverseIterator& operator++()

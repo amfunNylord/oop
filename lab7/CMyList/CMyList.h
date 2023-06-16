@@ -2,6 +2,8 @@
 #include "CMyListIterator.h"
 #include "CMyListReverseIterator.h"
 #include <list>
+#include <optional>
+
 template <typename T>
 class CMyList
 {
@@ -19,8 +21,9 @@ public:
 			// дестркутор не вызовется - +
 			catch (const std::exception&)
 			{
-				/*Clear();*/
-				this->~CMyList();
+				Clear();
+				delete m_lastNode;
+				m_lastNode = nullptr;
 				throw;
 			}
 		}
@@ -29,7 +32,7 @@ public:
 	{
 		if (std::addressof(other) != this)
 		{
-			// если выбросилось искл то потеряли старое значение
+			// если выбросилось искл то потеряли старое значение - +
 			CMyList tmpCopy(other);
 			Clear();
 			std::swap(m_size, tmpCopy.m_size);
@@ -99,7 +102,7 @@ public:
 		// если исключение то ++ не сработает - +
 		// дублирование new - +
 		// сделать зацикливание
-		Node<T>* newNode = new Node<T>(data, nullptr, nullptr);
+		Node<T>* newNode = new Node<T>(data);
 		if (m_size != 0)
 		{
 			m_size++;
@@ -164,5 +167,5 @@ public:
 
 private:
 	size_t m_size = 0;
-	Node<T>*m_firstNode = nullptr, *m_lastNode = new Node<T>(T(), nullptr, nullptr);
+	Node<T>*m_firstNode = nullptr, *m_lastNode = new Node<T>(std::nullopt);
 };
