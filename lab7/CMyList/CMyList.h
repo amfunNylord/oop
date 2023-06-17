@@ -18,8 +18,6 @@ public:
 				InsertBack(el);
 			}
 			// ловить любое исключение, отличное от std::exception
-			// поймали любое исключение, нужно то которое поймано - ?
-			// дестркутор не вызоветс€ - +
 			catch (const std::exception&)
 			{
 				Clear();
@@ -33,10 +31,7 @@ public:
 	{
 		if (std::addressof(other) != this)
 		{
-			// если выбросилось искл то потер€ли старое значение - +
 			CMyList tmpCopy(other);
-			// clear - не нужно
-			Clear();
 			std::swap(m_size, tmpCopy.m_size);
 			std::swap(m_firstNode, tmpCopy.m_firstNode);
 			std::swap(m_lastNode, tmpCopy.m_lastNode);
@@ -100,9 +95,6 @@ public:
 	}
 	void Insert(CMyListIterator<T> iter, const T& data)
 	{
-		// если исключение то ++ не сработает - +
-		// дублирование new - +
-		// сделать зацикливание
 		// упростить / через зацикливание
 		Node<T>* newNode = new Node<T>(data);
 		if (m_size != 0)
