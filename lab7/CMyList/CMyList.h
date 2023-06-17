@@ -1,9 +1,8 @@
 #pragma once
 #include "CMyListIterator.h"
 #include "CMyListReverseIterator.h"
-#include <list>
 #include <optional>
-
+// написать noexcept gde eto vozmojno 
 template <typename T>
 class CMyList
 {
@@ -11,13 +10,15 @@ public:
 	CMyList() = default;
 	CMyList(const CMyList& other)
 	{
+		// const &
 		for (T el : other)
 		{
 			try
 			{
 				InsertBack(el);
 			}
-			// поймали любое исключение, нужно то которое пойманоv - ?
+			// ловить любое исключение, отличное от std::exception
+			// поймали любое исключение, нужно то которое поймано - ?
 			// дестркутор не вызовется - +
 			catch (const std::exception&)
 			{
@@ -34,6 +35,7 @@ public:
 		{
 			// если выбросилось искл то потеряли старое значение - +
 			CMyList tmpCopy(other);
+			// clear - не нужно
 			Clear();
 			std::swap(m_size, tmpCopy.m_size);
 			std::swap(m_firstNode, tmpCopy.m_firstNode);
@@ -46,9 +48,8 @@ public:
 	{
 		Clear();
 		delete m_lastNode;
-		m_lastNode = nullptr;
 	}
-
+	// нужен move конструктор
 	CMyListIterator<T> begin() const
 	{
 		return CMyListIterator<T>(m_firstNode);
@@ -84,7 +85,7 @@ public:
 	}
 	void Clear()
 	{
-		if (!IsEmpty())
+		if (!IsEmpty()) // упростить код 
 		{
 			m_lastNode->prev->next = nullptr;
 			while (m_firstNode != nullptr)
@@ -102,6 +103,7 @@ public:
 		// если исключение то ++ не сработает - +
 		// дублирование new - +
 		// сделать зацикливание
+		// упростить / через зацикливание
 		Node<T>* newNode = new Node<T>(data);
 		if (m_size != 0)
 		{

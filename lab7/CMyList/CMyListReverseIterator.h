@@ -1,6 +1,7 @@
 #pragma once
 #include "CMyListNode.h"
 
+// sdelat reverse
 template <typename T>
 class CMyListReverseIterator
 {
@@ -29,7 +30,7 @@ public:
 	{
 		return &m_node->data.value();
 	}
-
+	// не нужно перехватывать искл если не могу корректно обработать
 	CMyListReverseIterator& operator++()
 	{
 		try
@@ -63,7 +64,7 @@ public:
 			}
 			m_node = m_node->next;
 		}
-		catch (const std::exception& e)
+		catch (const std::exception& e) // nikakih operaciy vivoda 
 		{
 			std::cout << "Error: " << e.what() << std::endl;
 		}
